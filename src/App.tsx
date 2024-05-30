@@ -1,11 +1,14 @@
 import './App.scss'
+import SettingsMenu from './components/SettingsMenu/SettingsMenu'
 
-function App() {
+const App = () => {
  
 
   return (
     <>
-    
+    <SettingsMenu onClose={function (): void {
+        throw new Error('Function not implemented.')
+      } } />
     </>
   )
 }

@@ -1,0 +1,22 @@
+@use "../src/styles/color.scss" as *;
+@use "../src/styles/reset.scss" as *;
+
+.button{
+    width: 5rem;
+    height: 2rem;
+    padding: 0.5rem 1.25rem;
+    border: 2px solid $black-color;
+    border-radius: 0.5rem;
+    background-color: $white-color;
+    align-content: center;
+    text-align: center;
+    margin-top: 1rem;
+    text-decoration: none;
+    &:hover{
+        cursor: pointer;
+        border: none;
+        transition: 0.3s ease-in-out;
+        background-color: $black-color;
+        color: $white-color;
+    }
+}
