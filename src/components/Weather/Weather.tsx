@@ -2,15 +2,14 @@ import { useState, useEffect } from "react";
 import Button from "../Button/Button";
 import "./Weather.scss";
 import { WeatherData } from "../../types/WeatherType";
+import cross from "../../assets/images/black-cross.png"
 
-type WeatherProps = {
-  location: string;
-};
 
-const Weather = ({ location }: WeatherProps) => {
+const Weather = () => {
   const [showExtra, setShowExtra] = useState<boolean>(false);
   const [weatherData, setWeatherData] = useState<WeatherData | null>(null);
   const [error, setError] = useState<string | null>(null);
+  
 
   const toggleShowExtra = () => {
     setShowExtra(!showExtra);
@@ -75,6 +74,11 @@ const Weather = ({ location }: WeatherProps) => {
     uv,
     precip_in,
     precip_mm,
+    vis_km,
+    vis_miles,
+    humidity,
+    gust_kph,
+    gust_mph,
     condition,
   } = weatherData.current;
   const { text, icon } = condition;
@@ -88,7 +92,11 @@ const Weather = ({ location }: WeatherProps) => {
       <h1 className="weather__temp">
         {temp_c}°C 
       </h1>
+      {!showExtra ? (
       <Button label="More..." onClick={toggleShowExtra} />
+      ) : (
+        <img className="weather__cross" src={cross} onClick={toggleShowExtra} alt="Exit"/>
+      )}
       {showExtra && (
         <div className="weather__extra">
             <div className="weather__extra-container">
@@ -114,9 +122,23 @@ const Weather = ({ location }: WeatherProps) => {
           </div>
 
           <div className="weather__extra-container">
+          <h3 className="weather__title">Visibility</h3>
+          <h2 className="weather__data">
+            {vis_miles} mph 
+          </h2>
+          </div>
+
+          <div className="weather__extra-container">
           <h3 className="weather__title">🌬Wind</h3>
           <h2 className="weather__data">
             {wind_mph} mph 
+          </h2>
+          </div>
+
+          <div className="weather__extra-container">
+          <h3 className="weather__title">Humidity</h3>
+          <h2 className="weather__data">
+            {humidity}%
           </h2>
           </div>
 
@@ -129,4 +151,3 @@ const Weather = ({ location }: WeatherProps) => {
 
 export default Weather;
 
-// useState to expand a section where more data is shown, like UV, wind, humidity,

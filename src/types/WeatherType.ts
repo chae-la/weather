@@ -14,5 +14,10 @@ export type WeatherData = {
     precip_mm: number;
     precip_in: number;
     uv: number;
+    vis_km: number;
+    vis_miles: number;
+    humidity: number;
+    gust_mph: number;
+    gust_kph: number;
   };
 };

@@ -29,6 +29,10 @@
         font-size: 5rem;
         margin:unset;
     }
+    &__cross{
+        display: flex;
+        align-self: flex-end;
+    }
     &__extra{
        display: grid;
        grid-template-columns: 1fr 1fr;
