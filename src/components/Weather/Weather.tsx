@@ -2,17 +2,28 @@ import { useState, useEffect } from "react";
 import Button from "../Button/Button";
 import "./Weather.scss";
 import { WeatherData } from "../../types/WeatherType";
-import cross from "../../assets/images/black-cross.png"
+import locationIcon from "../../assets/images/location.png";
+import cross from "../../assets/images/black-cross.png";
 
+type WeatherProps = {
+  initialLocation: string;
+};
 
-const Weather = () => {
+const Weather = ({ initialLocation }: WeatherProps) => {
   const [showExtra, setShowExtra] = useState<boolean>(false);
   const [weatherData, setWeatherData] = useState<WeatherData | null>(null);
   const [error, setError] = useState<string | null>(null);
-  
+  const [location, setLocation] = useState<string>(initialLocation);
+  const [inputLocation, setInputLocation] = useState<string>("");
 
   const toggleShowExtra = () => {
     setShowExtra(!showExtra);
+  };
+
+  const handleLocationChange = () => {
+    if (inputLocation.trim()) {
+      setLocation(inputLocation);
+    }
   };
 
   useEffect(() => {
@@ -46,19 +57,19 @@ const Weather = () => {
     return <div className="weather__loading">Loading...</div>;
   }
 
-  const uvIndex = (uv : number) => {
-    if(uv >= 0 && uv < 3){
-        return "Low"
-    } else if ( uv >= 3 && uv < 6){
-        return "Moderate"
-    } else if (uv >= 6 && uv < 8){
-        return "High"
-    } else if( uv <= 8 && uv < 10){
-        return "Very High"
+  const uvIndex = (uv: number) => {
+    if (uv >= 0 && uv < 3) {
+      return "Low";
+    } else if (uv >= 3 && uv < 6) {
+      return "Moderate";
+    } else if (uv >= 6 && uv < 8) {
+      return "High";
+    } else if (uv <= 8 && uv < 10) {
+      return "Very High";
     } else {
-        return "Extreme"
+      return "Extreme";
     }
-  }
+  };
 
   const currentUv = weatherData.current.uv;
   const getUvIndexWarning = uvIndex(currentUv);
@@ -85,15 +96,25 @@ const Weather = () => {
 
   return (
     <div className="weather">
-        <p className="weather__last-update">Last Updated: {last_updated}</p>
-      <h2 className="weather__location">{location}</h2>
+      <p className="weather__last-update">Last Updated: {last_updated}</p>
+      <div className="weather__input-container">
+        <img alt="Location Icon" className="weather__location-image" src={locationIcon}/>
+        <input
+          type="text"
+          value={inputLocation}
+          onChange={(e) => setInputLocation(e.target.value)}
+          placeholder="Enter location"
+          className="weather__input"
+        />
+        <Button label="🔍" onClick={handleLocationChange} variant="secondary" />
+      </div>
       <img className="weather__image" src={icon}/>
       <h5 className="weather__description">{text}</h5>
       <h1 className="weather__temp">
         {temp_c}°C 
       </h1>
       {!showExtra ? (
-      <Button label="More..." onClick={toggleShowExtra} />
+      <Button label="More..." onClick={toggleShowExtra} variant="primary" />
       ) : (
         <img className="weather__cross" src={cross} onClick={toggleShowExtra} alt="Exit"/>
       )}

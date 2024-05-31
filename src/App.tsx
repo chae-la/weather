@@ -9,7 +9,7 @@ const App = () => {
   return (
     <>
     
-     <Weather location='london' />
+     <Weather initialLocation='Malaysia' />
     </>
   )
 }
