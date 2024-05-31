@@ -25,7 +25,9 @@ const Weather = ({ initialLocation }: WeatherProps) => {
       setLocation(inputLocation);
     }
   };
-
+const reload = () => {
+    window.location.reload()
+};
   useEffect(() => {
     const fetchWeatherData = async () => {
       try {
@@ -41,7 +43,9 @@ const Weather = ({ initialLocation }: WeatherProps) => {
         const data = await result.json();
         setWeatherData(data);
       } catch (error) {
-        setError("Failed to fetch weather data");
+        setError("Failed to fetch weather data. Please Wait...");
+        setWeatherData(null);
+        setTimeout(reload, 2000)
         console.error(error);
       }
     };
@@ -56,6 +60,7 @@ const Weather = ({ initialLocation }: WeatherProps) => {
   if (!weatherData) {
     return <div className="weather__loading">Loading...</div>;
   }
+
 
   const uvIndex = (uv: number) => {
     if (uv >= 0 && uv < 3) {
@@ -98,72 +103,65 @@ const Weather = ({ initialLocation }: WeatherProps) => {
     <div className="weather">
       <p className="weather__last-update">Last Updated: {last_updated}</p>
       <div className="weather__input-container">
-        <img alt="Location Icon" className="weather__location-image" src={locationIcon}/>
+        <img
+          alt="Location Icon"
+          className="weather__location-image"
+          src={locationIcon}
+        />
         <input
           type="text"
           value={inputLocation}
           onChange={(e) => setInputLocation(e.target.value)}
-          placeholder="Enter location"
+          placeholder="e.g Kuala Lumpur"
           className="weather__input"
         />
         <Button label="🔍" onClick={handleLocationChange} variant="secondary" />
       </div>
-      <img className="weather__image" src={icon}/>
+      <img className="weather__image" src={icon} />
       <h5 className="weather__description">{text}</h5>
-      <h1 className="weather__temp">
-        {temp_c}°C 
-      </h1>
+      <h1 className="weather__temp">{temp_c}°C</h1>
       {!showExtra ? (
-      <Button label="More..." onClick={toggleShowExtra} variant="primary" />
+        <Button label="More..." onClick={toggleShowExtra} variant="primary" />
       ) : (
-        <img className="weather__cross" src={cross} onClick={toggleShowExtra} alt="Exit"/>
+        <img
+          className="weather__cross"
+          src={cross}
+          onClick={toggleShowExtra}
+          alt="Exit"
+        />
       )}
       {showExtra && (
         <div className="weather__extra">
-            <div className="weather__extra-container">
-          <h3 className="weather__title">🌡Feels like</h3>
-          <h2 className="weather__data">
-            {feelslike_c}°C 
-          </h2>
+          <div className="weather__extra-container">
+            <h3 className="weather__title">🌡Feels like</h3>
+            <h2 className="weather__data">{feelslike_c}°C</h2>
           </div>
 
           <div className="weather__extra-container">
-          <h3 className="weather__title">☀UV Index</h3>
-          <h2 className="weather__data">
-            {uv}
-          </h2>
-          <h3 className="weather__more">{getUvIndexWarning}</h3>
+            <h3 className="weather__title">☀UV Index</h3>
+            <h2 className="weather__data">{uv}</h2>
+            <h3 className="weather__more">{getUvIndexWarning}</h3>
           </div>
-        {/* add a slider to show what the max uv ratings are. */}
+          {/* add a slider to show what the max uv ratings are. */}
           <div className="weather__extra-container">
-          <h3 className="weather__title">☂Precipitation</h3>
-          <h2 className="weather__data">
-            {precip_mm} mm 
-          </h2>
+            <h3 className="weather__title">☂Precipitation</h3>
+            <h2 className="weather__data">{precip_mm} mm</h2>
           </div>
 
           <div className="weather__extra-container">
-          <h3 className="weather__title">Visibility</h3>
-          <h2 className="weather__data">
-            {vis_miles} mph 
-          </h2>
+            <h3 className="weather__title">👁Visibility</h3>
+            <h2 className="weather__data">{vis_miles} mph</h2>
           </div>
 
           <div className="weather__extra-container">
-          <h3 className="weather__title">🌬Wind</h3>
-          <h2 className="weather__data">
-            {wind_mph} mph 
-          </h2>
+            <h3 className="weather__title">🌬Wind</h3>
+            <h2 className="weather__data">{wind_mph} mph</h2>
           </div>
 
           <div className="weather__extra-container">
-          <h3 className="weather__title">Humidity</h3>
-          <h2 className="weather__data">
-            {humidity}%
-          </h2>
+            <h3 className="weather__title">🌀Humidity</h3>
+            <h2 className="weather__data">{humidity}%</h2>
           </div>
-
-          
         </div>
       )}
     </div>
@@ -171,4 +169,3 @@ const Weather = ({ initialLocation }: WeatherProps) => {
 };
 
 export default Weather;
-
