@@ -1,0 +1,56 @@
+@use "../src/styles/colors" as *;
+@use "../src/styles/reset" as *;
+
+.weather{
+    display: flex;
+    border: 0.15rem solid $black-color;
+    border-radius: 1rem;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+    background-color: $white-color;
+    &__last-update{
+        display: flex;
+        font-size: 0.5rem;
+        align-self: flex-end;
+    }
+    &__location{
+        font-size: clamp(2rem, 3vw, 5rem);
+        margin: unset;
+    }
+    &__image{
+        width: 50%;
+    }
+    &__description{
+        margin: unset;
+    }
+    &__temp{
+        font-size: 5rem;
+        margin:unset;
+    }
+    &__extra{
+       display: grid;
+       grid-template-columns: 1fr 1fr;
+       gap: 1rem;
+       margin-top: 2rem;
+    }
+    &__extra-container{
+        border: 0.1rem solid $black-color;
+        border-radius: 1rem;
+        text-align: center;
+        padding: 0.5rem;
+        height: 6rem;
+    }
+    &__title{
+        font-size: 0.7rem;
+        margin: unset;
+    }
+    &__data{
+        margin-bottom: unset;
+    }
+    &__more{
+        margin:unset;
+        font-size: 0.7rem;
+    }
+}

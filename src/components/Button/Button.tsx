@@ -2,11 +2,12 @@ import "./Button.scss"
 
 type ButtonProps ={
     label: string;
+    onClick : () => void;
 }
 
-const Button = ({label}: ButtonProps) => {
+const Button = ({label, onClick}: ButtonProps) => {
     return(
-            <a className="button">{label}</a>
+            <a className="button" onClick={onClick}>{label} </a>
     )
 
 }

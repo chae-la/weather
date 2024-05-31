@@ -1,5 +1,5 @@
-@use "../src/styles/color.scss" as *;
-@use "../src/styles/reset.scss" as *;
+@use "../../styles/colors" as *;
+@use "../../styles/reset.scss" as *;
 
 .button{
     width: 5rem;
