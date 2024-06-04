@@ -6,7 +6,6 @@ import Button from "../Button/Button";
 const Todo = () => {
   const [todos, setTodos] = useState<TodoType[]>([]);
   const [task, setTask] = useState<string>("");
-  const [description, setDescription] = useState<string>("");
 
   const handleInput = (event: React.ChangeEvent<HTMLInputElement>) => {
     setTask(event.target.value);
@@ -30,33 +29,37 @@ const Todo = () => {
     setTask("");
   };
 
-  const handleCompleteTask = (todo: TodoType) => {
-    const taskIndex = todos.indexOf(todo);
-    todo.isComplete = !todo.isComplete;
-    todos.splice(taskIndex, 1, todo);
-    setTodos([...todos]);
+  const handleCompleteTask = (id: number) => {
+    setTodos(todos.map(todo => 
+      todo.id === id ? { ...todo, isComplete: !todo.isComplete } : todo
+    ));
   };
 
   const handleDeleteTask = (id: number) => {
-    const taskIndex = todos.findIndex((todo) => todo.id === id);
-    todos.splice(taskIndex, 1);
-    setTodos([...todos]);
+    setTodos(todos.filter((todo) => todo.id !== id));
   };
 
+  const today = new Date();
+  const month = today.getMonth()+1;
+const year = today.getFullYear();
+const date = today. getDate();
+const currentDate = date + "/" + month + "/" + year;
   return (
     <div className="todo">
-      <form onSubmit={handleFormSubmit}>
-        <input type="text" onChange={handleInput} placeholder="Enter A Task..." />
+      <form onSubmit={handleFormSubmit} className="todo__form">
+        <input type="text" onChange={handleInput} placeholder="Enter A Task..." className="todo__input" value={task}/>
         <Button label="+" variant="secondary" />
       </form>
-      <ul>
+      <p className="todo__title">{currentDate}</p>
+      <ul className="todo__list">
         {todos.map((todo) => (
-          <li key={todo.id}>
+            <li key={todo.id} className={`todo__item ${todo.isComplete ? 'todo__item--complete' : ''}`}>
             {todo.title}
             <input
               type="checkbox"
               checked={todo.isComplete}
-              onChange={() => handleCompleteTask}
+              onChange={() => handleCompleteTask(todo.id)}
+              className="todo__check"
             />
             <Button
               label="X"

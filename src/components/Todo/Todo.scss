@@ -1,0 +1,45 @@
+@use "../../styles/colors" as *;
+@use "../../styles/reset.scss" as *;
+
+.todo {
+  border: 0.15rem solid $black-color;
+  border-radius: 1rem;
+  padding: 1rem;
+  background-color: $white-color;
+  &__form {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+  }
+  &__input {
+    width: 85%;
+    border-radius: 1rem;
+    text-indent: 0.5rem;
+  }
+  &__title{
+    text-align: end;
+  }
+  &__list {
+    list-style-type: none;
+    
+    &::marker {
+      visibility: hidden;
+    }
+  }
+  &__item{
+    width: 95%;
+    display: flex;
+    justify-content:space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    &--complete{
+        text-decoration: line-through;
+        opacity: 50%;
+    }
+  }
+  &__check{
+    position: absolute;
+    margin-left: -1.5rem;
+    
+  }
+}
