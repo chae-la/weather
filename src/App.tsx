@@ -1,6 +1,7 @@
-import { FormEvent } from 'react'
+
 import './App.scss'
 import SettingsMenu from './components/SettingsMenu/SettingsMenu'
+import Todo from './components/Todo/Todo'
 import Weather from './components/Weather/Weather'
 
 const App = () => {
@@ -10,6 +11,7 @@ const App = () => {
     <>
     
      <Weather initialLocation='Kuala Lumpur' />
+     <Todo />
     </>
   )
 }
