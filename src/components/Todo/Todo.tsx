@@ -46,6 +46,7 @@ const date = today. getDate();
 const currentDate = date + "/" + month + "/" + year;
   return (
     <div className="todo">
+        <h2 className="todo__header">To-Do</h2>
       <form onSubmit={handleFormSubmit} className="todo__form">
         <input type="text" onChange={handleInput} placeholder="Enter A Task..." className="todo__input" value={task}/>
         <Button label="+" variant="secondary" />

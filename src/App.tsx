@@ -9,7 +9,7 @@ const App = () => {
 
   return (
     <>
-    
+    <SettingsMenu/>
      <Weather initialLocation='Kuala Lumpur' />
      <Todo />
     </>

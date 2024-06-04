@@ -6,13 +6,18 @@
   border-radius: 1rem;
   padding: 1rem;
   background-color: $white-color;
+  margin-top: 1rem;
+  &__header{
+    text-align: center;
+    margin-top: unset;
+  }
   &__form {
     width: 100%;
     display: flex;
     justify-content: space-between;
   }
   &__input {
-    width: 85%;
+    width: 84%;
     border-radius: 1rem;
     text-indent: 0.5rem;
   }
