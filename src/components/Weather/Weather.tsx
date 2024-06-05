@@ -4,6 +4,7 @@ import "./Weather.scss";
 import { WeatherData } from "../../types/WeatherType";
 import locationIcon from "../../assets/images/location.png";
 import cross from "../../assets/images/black-cross.png";
+import WeatherExtra from "../WeatherExtra/WeatherExtra";
 
 type WeatherProps = {
   initialLocation: string;
@@ -132,18 +133,18 @@ const reload = () => {
       )}
       {showExtra && (
         <div className="weather__extra">
-          <div className="weather__extra-container">
-            <h3 className="weather__title">🌡Feels like</h3>
-            <h2 className="weather__data">{feelslike_c}°C</h2>
-          </div>
+          <WeatherExtra title="🌡Feels like" data={`${feelslike_c}°C`} />
+          <WeatherExtra title="☀UV Index" data={`${uv}`} more_info={getUvIndexWarning} />
+          <WeatherExtra title={"☂Precipitation"} data={`${precip_mm}mm`} />
+          <WeatherExtra title={"👁Visibility"} data={`${vis_km}km`} />
+          <WeatherExtra title={"🌬Wind"} data={`${wind_kph}kph`} />
+          <WeatherExtra title={"🌀Humidity"} data={`${humidity}%`} />
+          
 
-          <div className="weather__extra-container">
-            <h3 className="weather__title">☀UV Index</h3>
-            <h2 className="weather__data">{uv}</h2>
-            <h3 className="weather__more">{getUvIndexWarning}</h3>
-          </div>
+
+         
           {/* add a slider to show what the max uv ratings are. */}
-          <div className="weather__extra-container">
+          {/* <div className="weather__extra-container">
             <h3 className="weather__title">☂Precipitation</h3>
             <h2 className="weather__data">{precip_mm} mm</h2>
           </div>
@@ -161,7 +162,7 @@ const reload = () => {
           <div className="weather__extra-container">
             <h3 className="weather__title">🌀Humidity</h3>
             <h2 className="weather__data">{humidity}%</h2>
-          </div>
+          </div> */} 
         </div>
       )}
     </div>

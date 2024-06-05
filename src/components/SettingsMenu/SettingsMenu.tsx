@@ -25,13 +25,13 @@ const SettingsMenu = () => {
         <h4 className="settings-menu__title">Configure the Units</h4>
         <div className="settings-menu__switch-container">
         <p>Temperature Unit</p>
-        <Switch labelOne="°F" labelTwo="°C" />
+        <Switch labelOne="°F" labelTwo="°C" value="c"  />
         <p>Wind & Gust Unit</p>
-        <Switch labelOne="mph" labelTwo="kph" />
+        <Switch labelOne="mph" labelTwo="kph" value="kph"  />
         <p>Precipitation Unit</p>
-        <Switch labelOne="in" labelTwo="mm" />
+        <Switch labelOne="in" labelTwo="mm" value="mm"  />
         <p>Visibility Unit</p>
-        <Switch labelOne="miles" labelTwo="km"/>
+        <Switch labelOne="miles" labelTwo="km" value="km"  />
         </div>
         
       </div>
