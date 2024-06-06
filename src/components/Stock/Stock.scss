@@ -7,6 +7,15 @@
   padding: 1rem;
   background-color: $white-color;
   margin-top: 1rem;
+  &__title{
+    text-align: center;
+    margin: unset;
+  }
+  &__last-update{
+    text-align: end;
+    margin-top: unset;
+    font-size: 0.5rem;
+  }
   &__input-container{
     display: flex;
     justify-content: center;

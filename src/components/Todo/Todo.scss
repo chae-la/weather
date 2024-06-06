@@ -9,7 +9,7 @@
   margin-top: 1rem;
   &__header{
     text-align: center;
-    margin-top: unset;
+    margin: unset;
   }
   &__form {
     width: 100%;
@@ -23,6 +23,7 @@
   }
   &__title{
     text-align: end;
+    margin-top: unset
   }
   &__list {
     list-style-type: none;

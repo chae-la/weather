@@ -2,6 +2,7 @@ import "./Todo.scss";
 import { TodoType } from "../../types/TodoType";
 import { useState } from "react";
 import Button from "../Button/Button";
+import { currentDate } from "../Utilities/Date";
 
 const Todo = () => {
   const [todos, setTodos] = useState<TodoType[]>([]);
@@ -39,19 +40,14 @@ const Todo = () => {
     setTodos(todos.filter((todo) => todo.id !== id));
   };
 
-  const today = new Date();
-  const month = today.getMonth()+1;
-const year = today.getFullYear();
-const date = today. getDate();
-const currentDate = date + "/" + month + "/" + year;
   return (
     <div className="todo">
         <h2 className="todo__header">To-Do</h2>
+      <p className="todo__title">{currentDate}</p>
       <form onSubmit={handleFormSubmit} className="todo__form">
         <input type="text" onChange={handleInput} placeholder="Enter A Task..." className="todo__input" value={task}/>
         <Button label="+" variant="secondary" />
       </form>
-      <p className="todo__title">{currentDate}</p>
       <ul className="todo__list">
         {todos.map((todo) => (
             <li key={todo.id} className={`todo__item ${todo.isComplete ? 'todo__item--complete' : ''}`}>

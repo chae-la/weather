@@ -2,8 +2,9 @@ import { useEffect, useState } from "react";
 import "./Stock.scss";
 import { StocksData } from "../../types/StocksType";
 import Button from "../Button/Button";
-
-
+import { currentDate } from "../Utilities/Date";
+import { reload } from "../Utilities/Refresh";
+import { capitals } from "../Utilities/Capitals";
 
 const Stock = () => {
   const [ticker, setTicker] = useState<string>("");
@@ -16,6 +17,7 @@ const Stock = () => {
       setTicker(inputTicker);
     }
   };
+
 
   useEffect(() => {
     const fetchStockData = async () => {
@@ -40,7 +42,9 @@ const Stock = () => {
         };
         setStockData(parsedData);
       } catch (error) {
-        setError("Failed to fetch stock data. Please try again later.");
+        setError("Failed to fetch stock data. Please wait...");
+        setStockData(null);
+        setTimeout(reload, 2000)
         console.error(error);
       }
     };
@@ -51,12 +55,35 @@ const Stock = () => {
     return <div className="stock__error">{error}</div>;
   }
 
+  const arrowChange = (changePercentage: number) => {
+    if (changePercentage > 0) {
+      return "^";
+    } else if (changePercentage === 0) {
+      return "=";
+    } else {
+      return "v";
+    }
+  };
+
+  const getChangeColor = (changePercentage: number) => {
+    if (changePercentage > 0) {
+      return "green";
+    } else if (changePercentage < 0) {
+      return "red";
+    } else {
+      return "black";
+    }
+  };
+
+
   return (
     <div className="stock">
+      <h2 className="stock__title">Stocks</h2>
+        <p className="stock__last-update">Last Updated: {currentDate}</p>
       <div className="stock__input-container">
         <input
           type="text"
-          value={inputTicker}
+          value={capitals(inputTicker)}
           onChange={(e) => setInputTicker(e.target.value)}
           placeholder="e.g AAPL"
           className="stock__input"
@@ -66,14 +93,19 @@ const Stock = () => {
       {stockData && (
         <div className="stock__data-container">
           <div className="stock__title-container">
-       <h3>{stockData.name}</h3>
-        <h3>{stockData.price}</h3>
-            </div>
-            <div className="stock__hilo-container">
-        <p>High: {stockData.dayHigh}</p>
-        <p>Low: {stockData.dayLow}</p>
-              </div>
-        <h2 className="stock__change">{stockData.changePercentage}%</h2>
+            <h3>{stockData.name}</h3>
+            <h3>{stockData.price}</h3>
+          </div>
+          <div className="stock__hilo-container">
+            <p>High: {stockData.dayHigh}</p>
+            <p>Low: {stockData.dayLow}</p>
+          </div>
+          <h2
+            className="stock__change"
+            style={{ color: getChangeColor(stockData.changePercentage) }}
+          >
+            {stockData.changePercentage}% {arrowChange(stockData.changePercentage)}
+          </h2>
         </div>
       )}
     </div>

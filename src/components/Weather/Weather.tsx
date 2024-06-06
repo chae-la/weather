@@ -6,6 +6,7 @@ import locationIcon from "../../assets/images/location.png";
 import cross from "../../assets/images/black-cross.png";
 import WeatherExtra from "../WeatherExtra/WeatherExtra";
 import { Settings } from "../../types/SettingsType";
+import { reload } from "../Utilities/Refresh";
 
 type WeatherProps = {
   initialLocation: string;
@@ -19,8 +20,6 @@ const Weather = ({ initialLocation, settings }: WeatherProps) => {
   const [location, setLocation] = useState<string>(initialLocation);
   const [inputLocation, setInputLocation] = useState<string>("");
 
-
-
   const toggleShowExtra = () => {
     setShowExtra(!showExtra);
   };
@@ -30,9 +29,7 @@ const Weather = ({ initialLocation, settings }: WeatherProps) => {
       setLocation(inputLocation);
     }
   };
-const reload = () => {
-    window.location.reload()
-};
+
   useEffect(() => {
     const fetchWeatherData = async () => {
       try {
