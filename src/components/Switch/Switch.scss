@@ -12,7 +12,7 @@
       height: 0;
   
       &:checked + .switch__slider {
-        background-color: #09ad2d;
+        background-color: #f53f3f;
       }
   
       &:checked + .switch__slider:before {
@@ -35,7 +35,7 @@
       left: 0;
       right: 0;
       bottom: 0;
-      background-color: #f53f3f;
+      background-color: #09ad2d;
       transition: 0.4s;
       border-radius: 34px;
   

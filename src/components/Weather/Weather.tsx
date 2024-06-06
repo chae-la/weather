@@ -5,17 +5,21 @@ import { WeatherData } from "../../types/WeatherType";
 import locationIcon from "../../assets/images/location.png";
 import cross from "../../assets/images/black-cross.png";
 import WeatherExtra from "../WeatherExtra/WeatherExtra";
+import { Settings } from "../../types/SettingsType";
 
 type WeatherProps = {
   initialLocation: string;
+  settings : Settings;
 };
 
-const Weather = ({ initialLocation }: WeatherProps) => {
+const Weather = ({ initialLocation, settings }: WeatherProps) => {
   const [showExtra, setShowExtra] = useState<boolean>(false);
   const [weatherData, setWeatherData] = useState<WeatherData | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [location, setLocation] = useState<string>(initialLocation);
   const [inputLocation, setInputLocation] = useState<string>("");
+
+
 
   const toggleShowExtra = () => {
     setShowExtra(!showExtra);
@@ -94,11 +98,15 @@ const reload = () => {
     vis_km,
     vis_miles,
     humidity,
-    gust_kph,
-    gust_mph,
     condition,
   } = weatherData.current;
   const { text, icon } = condition;
+
+  const temperature = settings.temperature === "C" ? `${temp_c}°C` : `${temp_f}°F`;
+  const visibility = settings.visibility === "km" ? `${vis_km}km` : `${vis_miles}mi`;
+  const feelsLike = settings.temperature === "C" ? `${feelslike_c}°C` : `${feelslike_f}°F`;
+  const wind = settings.wind === "kph" ? `${wind_kph}kph` : `${wind_mph}mph`;
+  const precipitation = settings.precipitation === "mm" ? `${precip_mm}mm` : `${precip_in}in`;
 
   return (
     <div className="weather">
@@ -120,7 +128,7 @@ const reload = () => {
       </div>
       <img className="weather__image" src={icon} />
       <h5 className="weather__description">{text}</h5>
-      <h1 className="weather__temp">{temp_c}°C</h1>
+      <h1 className="weather__temp">{temperature}</h1>
       {!showExtra ? (
         <Button label="More..." onClick={toggleShowExtra} variant="primary" />
       ) : (
@@ -133,36 +141,15 @@ const reload = () => {
       )}
       {showExtra && (
         <div className="weather__extra">
-          <WeatherExtra title="🌡Feels like" data={`${feelslike_c}°C`} />
+          <WeatherExtra title="🌡Feels like" data={`${feelsLike}`} />
           <WeatherExtra title="☀UV Index" data={`${uv}`} more_info={getUvIndexWarning} />
-          <WeatherExtra title={"☂Precipitation"} data={`${precip_mm}mm`} />
-          <WeatherExtra title={"👁Visibility"} data={`${vis_km}km`} />
-          <WeatherExtra title={"🌬Wind"} data={`${wind_kph}kph`} />
+          <WeatherExtra title={"☂Precipitation"} data={`${precipitation}`} />
+          <WeatherExtra title={"👁Visibility"} data={`${visibility}`} />
+          <WeatherExtra title={"🌬Wind"} data={`${wind}`} />
           <WeatherExtra title={"🌀Humidity"} data={`${humidity}%`} />
           
-
-
-         
           {/* add a slider to show what the max uv ratings are. */}
-          {/* <div className="weather__extra-container">
-            <h3 className="weather__title">☂Precipitation</h3>
-            <h2 className="weather__data">{precip_mm} mm</h2>
-          </div>
-
-          <div className="weather__extra-container">
-            <h3 className="weather__title">👁Visibility</h3>
-            <h2 className="weather__data">{vis_miles} mph</h2>
-          </div>
-
-          <div className="weather__extra-container">
-            <h3 className="weather__title">🌬Wind</h3>
-            <h2 className="weather__data">{wind_mph} mph</h2>
-          </div>
-
-          <div className="weather__extra-container">
-            <h3 className="weather__title">🌀Humidity</h3>
-            <h2 className="weather__data">{humidity}%</h2>
-          </div> */} 
+       
         </div>
       )}
     </div>

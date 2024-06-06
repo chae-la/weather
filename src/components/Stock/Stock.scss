@@ -1,0 +1,35 @@
+@use "../../styles/colors" as *;
+@use "../../styles/reset.scss" as *;
+
+.stock {
+  border: 0.15rem solid $black-color;
+  border-radius: 1rem;
+  padding: 1rem;
+  background-color: $white-color;
+  margin-top: 1rem;
+  &__input-container{
+    display: flex;
+    justify-content: center;
+  }
+  &__input{
+    border: unset;
+    font-size: 1.25rem;
+    width: 70%;
+    text-align: center;
+    
+  }
+  &__title-container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+  }
+  &__hilo-container{
+    display: flex;
+    justify-content: space-around;
+    
+  }
+  &__change{
+    text-align: center;
+  }
+}

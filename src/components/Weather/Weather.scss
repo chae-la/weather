@@ -18,6 +18,7 @@
   &__input-container {
     display: flex;
     width: 100%;
+    align-items: center;
   }
   &__location-image {
     width: 15%;
@@ -26,6 +27,7 @@
     border: unset;
     font-size: 1.25rem;
     width: 70%;
+    text-align: center;
   }
   &__image {
     width: 50%;

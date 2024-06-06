@@ -1,21 +1,26 @@
-
-import './App.scss'
-import SettingsMenu from './components/SettingsMenu/SettingsMenu'
-import StockCard from './components/StockCard/StockCard'
-import Todo from './components/Todo/Todo'
-import Weather from './components/Weather/Weather'
+import "./App.scss";
+import SettingsMenu from "./components/SettingsMenu/SettingsMenu";
+import Stock from "./components/Stock/Stock";
+import Todo from "./components/Todo/Todo";
+import Weather from "./components/Weather/Weather";
 
 const App = () => {
- 
-
   return (
     <>
-    <StockCard ticker='TSCO.LON' high='100' low={'50'} last_refresh='2024/02/24' change='-0.64' />
-    <SettingsMenu/>
-     <Weather initialLocation='Kuala Lumpur' />
-     <Todo />
+      <SettingsMenu />
+      <Weather
+        initialLocation="Kuala Lumpur"
+        settings={{
+          temperature: "C",
+          wind: "kph",
+          precipitation: "mm",
+          visibility: "km",
+        }}
+      />
+      <Stock />
+      <Todo />
     </>
-  )
-}
+  );
+};
 
-export default App
+export default App;
