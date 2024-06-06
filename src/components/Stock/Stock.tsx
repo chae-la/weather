@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import "./Stock.scss";
-import StockCard from "../StockCard/StockCard";
 import { StocksData } from "../../types/StocksType";
 import Button from "../Button/Button";
 
