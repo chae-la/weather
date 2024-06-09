@@ -6,11 +6,11 @@ import locationIcon from "../../assets/images/location.png";
 import cross from "../../assets/images/black-cross.png";
 import WeatherExtra from "../WeatherExtra/WeatherExtra";
 import { Settings } from "../../types/SettingsType";
-import { reload } from "../Utilities/Refresh";
+import { reload } from "../../Utilities/Refresh";
 
 type WeatherProps = {
   initialLocation: string;
-  settings : Settings;
+  settings: Settings;
 };
 
 const Weather = ({ initialLocation, settings }: WeatherProps) => {
@@ -47,7 +47,7 @@ const Weather = ({ initialLocation, settings }: WeatherProps) => {
       } catch (error) {
         setError("Failed to fetch weather data. Please Wait...");
         setWeatherData(null);
-        setTimeout(reload, 2000)
+        setTimeout(reload, 2000);
         console.error(error);
       }
     };
@@ -62,7 +62,6 @@ const Weather = ({ initialLocation, settings }: WeatherProps) => {
   if (!weatherData) {
     return <div className="weather__loading">Loading...</div>;
   }
-
 
   const uvIndex = (uv: number) => {
     if (uv >= 0 && uv < 3) {
@@ -99,11 +98,15 @@ const Weather = ({ initialLocation, settings }: WeatherProps) => {
   } = weatherData.current;
   const { text, icon } = condition;
 
-  const temperature = settings.temperature === "C" ? `${temp_c}°C` : `${temp_f}°F`;
-  const visibility = settings.visibility === "km" ? `${vis_km}km` : `${vis_miles}mi`;
-  const feelsLike = settings.temperature === "C" ? `${feelslike_c}°C` : `${feelslike_f}°F`;
+  const temperature =
+    settings.temperature === "C" ? `${temp_c}°C` : `${temp_f}°F`;
+  const visibility =
+    settings.visibility === "km" ? `${vis_km}km` : `${vis_miles}mi`;
+  const feelsLike =
+    settings.temperature === "C" ? `${feelslike_c}°C` : `${feelslike_f}°F`;
   const wind = settings.wind === "kph" ? `${wind_kph}kph` : `${wind_mph}mph`;
-  const precipitation = settings.precipitation === "mm" ? `${precip_mm}mm` : `${precip_in}in`;
+  const precipitation =
+    settings.precipitation === "mm" ? `${precip_mm}mm` : `${precip_in}in`;
 
   return (
     <div className="weather">
@@ -139,14 +142,17 @@ const Weather = ({ initialLocation, settings }: WeatherProps) => {
       {showExtra && (
         <div className="weather__extra">
           <WeatherExtra title="🌡Feels like" data={`${feelsLike}`} />
-          <WeatherExtra title="☀UV Index" data={`${uv}`} more_info={getUvIndexWarning} />
+          <WeatherExtra
+            title="☀UV Index"
+            data={`${uv}`}
+            more_info={getUvIndexWarning}
+          />
           <WeatherExtra title={"☂Precipitation"} data={`${precipitation}`} />
           <WeatherExtra title={"👁Visibility"} data={`${visibility}`} />
           <WeatherExtra title={"🌬Wind"} data={`${wind}`} />
           <WeatherExtra title={"🌀Humidity"} data={`${humidity}%`} />
-          
+
           {/* add a slider to show what the max uv ratings are. */}
-       
         </div>
       )}
     </div>

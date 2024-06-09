@@ -2,9 +2,9 @@ import { useEffect, useState } from "react";
 import "./Stock.scss";
 import { StocksData } from "../../types/StocksType";
 import Button from "../Button/Button";
-import { currentDate } from "../Utilities/Date";
-import { reload } from "../Utilities/Refresh";
-import { capitals } from "../Utilities/Capitals";
+import { currentDate } from "../../Utilities/Date";
+import { reload } from "../../Utilities/Refresh";
+import { capitals } from "../../Utilities/Capitals";
 
 const Stock = () => {
   const [ticker, setTicker] = useState<string>("");
@@ -18,17 +18,18 @@ const Stock = () => {
     }
   };
 
-
   useEffect(() => {
     const fetchStockData = async () => {
       if (!ticker) return;
       try {
-        const apiKey = "qEgA0cDIdKGMdXoHjP8jcScEfZIYmrJR"; 
+        const apiKey = "qEgA0cDIdKGMdXoHjP8jcScEfZIYmrJR";
         const result = await fetch(
           `https://financialmodelingprep.com/api/v3/quote/${ticker}?apikey=${apiKey}`
         );
         if (!result.ok) {
-          throw new Error(`Something went wrong. HTTP status: ${result.status}`);
+          throw new Error(
+            `Something went wrong. HTTP status: ${result.status}`
+          );
         }
         const data = await result.json();
         const stockInfo = data[0];
@@ -44,7 +45,7 @@ const Stock = () => {
       } catch (error) {
         setError("Failed to fetch stock data. Please wait...");
         setStockData(null);
-        setTimeout(reload, 2000)
+        setTimeout(reload, 2000);
         console.error(error);
       }
     };
@@ -75,11 +76,10 @@ const Stock = () => {
     }
   };
 
-
   return (
     <div className="stock">
       <h2 className="stock__title">Stocks</h2>
-        <p className="stock__last-update">Last Updated: {currentDate}</p>
+      <p className="stock__last-update">Last Updated: {currentDate}</p>
       <div className="stock__input-container">
         <input
           type="text"
@@ -104,7 +104,8 @@ const Stock = () => {
             className="stock__change"
             style={{ color: getChangeColor(stockData.changePercentage) }}
           >
-            {stockData.changePercentage}% {arrowChange(stockData.changePercentage)}
+            {stockData.changePercentage}%{" "}
+            {arrowChange(stockData.changePercentage)}
           </h2>
         </div>
       )}

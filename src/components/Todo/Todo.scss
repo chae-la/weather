@@ -7,7 +7,7 @@
   padding: 1rem;
   background-color: $white-color;
   margin-top: 1rem;
-  &__header{
+  &__header {
     text-align: center;
     margin: unset;
   }
@@ -21,31 +21,67 @@
     border-radius: 1rem;
     text-indent: 0.5rem;
   }
-  &__title{
+  &__title {
     text-align: end;
-    margin-top: unset
+    margin-top: unset;
   }
   &__list {
     list-style-type: none;
-    
+
     &::marker {
       visibility: hidden;
     }
   }
-  &__item{
+  &__item {
     width: 95%;
     display: flex;
-    justify-content:space-between;
+    justify-content: space-between;
     align-items: center;
     margin-bottom: 1rem;
-    &--complete{
-        text-decoration: line-through;
-        opacity: 50%;
+    &--complete {
+      text-decoration: line-through;
+      opacity: 50%;
     }
   }
-  &__check{
+  &__check {
     position: absolute;
     margin-left: -1.5rem;
-    
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .todo {
+    margin: 2rem;
+    &__header {
+      font-size: 2rem;
+    }
+    &__form{
+      width: 70%;
+      margin: 0 auto;
+    }
+    &__input{
+      font-size: 2rem;
+    }
+    &__list{
+      margin: 3rem 4rem;
+    }
+    &__item{
+      font-size: 2rem;
+    }
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .todo{
+    margin: 3rem 4rem;
+    &__header{
+      font-size: 3rem;;
+    }
+    &__title{
+      font-size: 1rem;
+    }
+    &__list{
+      margin: 4rem 5rem;
+    }
   }
 }

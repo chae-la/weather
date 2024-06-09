@@ -22,7 +22,7 @@ const SettingsMenu = () => {
   const toggleWind = (value : Unit) => setWindUnit(value);
 
 
-  
+  //local storage? for if the page refreshed. 
 
   const toggleShowSettings = () => {
     setShowSettings(!showSettings)

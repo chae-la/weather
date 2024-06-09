@@ -2,7 +2,7 @@ import "./Todo.scss";
 import { TodoType } from "../../types/TodoType";
 import { useState } from "react";
 import Button from "../Button/Button";
-import { currentDate } from "../Utilities/Date";
+import { currentDate } from "../../Utilities/Date";
 
 const Todo = () => {
   const [todos, setTodos] = useState<TodoType[]>([]);
@@ -31,9 +31,11 @@ const Todo = () => {
   };
 
   const handleCompleteTask = (id: number) => {
-    setTodos(todos.map(todo => 
-      todo.id === id ? { ...todo, isComplete: !todo.isComplete } : todo
-    ));
+    setTodos(
+      todos.map((todo) =>
+        todo.id === id ? { ...todo, isComplete: !todo.isComplete } : todo
+      )
+    );
   };
 
   const handleDeleteTask = (id: number) => {
@@ -42,15 +44,26 @@ const Todo = () => {
 
   return (
     <div className="todo">
-        <h2 className="todo__header">To-Do</h2>
+      <h2 className="todo__header">To-Do</h2>
       <p className="todo__title">{currentDate}</p>
       <form onSubmit={handleFormSubmit} className="todo__form">
-        <input type="text" onChange={handleInput} placeholder="Enter A Task..." className="todo__input" value={task}/>
+        <input
+          type="text"
+          onChange={handleInput}
+          placeholder="Enter A Task..."
+          className="todo__input"
+          value={task}
+        />
         <Button label="+" variant="secondary" />
       </form>
       <ul className="todo__list">
         {todos.map((todo) => (
-            <li key={todo.id} className={`todo__item ${todo.isComplete ? 'todo__item--complete' : ''}`}>
+          <li
+            key={todo.id}
+            className={`todo__item ${
+              todo.isComplete ? "todo__item--complete" : ""
+            }`}
+          >
             {todo.title}
             <input
               type="checkbox"

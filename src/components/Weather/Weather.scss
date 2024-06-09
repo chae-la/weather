@@ -49,6 +49,52 @@
     gap: 1rem;
     margin-top: 2rem;
   }
-  
-  
+}
+
+@media screen and (min-width: 768px) {
+  .weather {
+    margin: 2rem;
+    &__last-update{
+      font-size: 0.7rem;
+    }
+    &__input-container {
+      justify-content: space-evenly;
+     
+    }
+    &__input {
+      font-size: 2rem;
+      width: fit-content;
+    }
+    &__location-image {
+      width: 10%;
+    }
+    &__image{
+      width: 45%;
+    }
+    &__description{
+      font-size:1.5rem;
+    }
+    &__extra{
+      grid-template-columns: repeat(3, 1fr);
+      width: 80%;
+    }
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .weather{
+    margin: 3rem 4rem;
+    &__last-update{
+      font-size: 1rem;
+    }
+    &__input{
+      font-size: 2.5rem;
+    }
+    &__image{
+      width:30%;
+    }
+    &__extra{
+      gap: 3rem;
+    }
+  }
 }
