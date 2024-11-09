@@ -33,7 +33,7 @@ const Weather = ({ initialLocation, settings }: WeatherProps) => {
   useEffect(() => {
     const fetchWeatherData = async () => {
       try {
-        const apiKey = "1817ba2f890e44e3a69203844243005";
+        const apiKey = "";
         const result = await fetch(
           `http://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${location}`
         );
